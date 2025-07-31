@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Needle Music Co. – Where every groove tells a story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #2d1b69 50%, #000428 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .station-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .robot-dj {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(30, 144, 255, 0.3));
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .robot-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: robotBlink 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+        }
+
+        .dj-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4ecdc4;
+        }
+
+        .dj-message {
+            font-size: 1rem;
+            color: #e0e0e0;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .album-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #4ecdc4;
+            text-align: center;
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .album-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .album-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 205, 196, 0.3);
+            border-color: #4ecdc4;
+        }
+
+        .album-cover {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .album-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .album-artist {
+            font-size: 1rem;
+            color: #4ecdc4;
+            margin-bottom: 10px;
+        }
+
+        .album-duration {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+
+        .player-panel {
+            position: sticky;
+            top: 20px;
+        }
+
+        .now-playing {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(76, 205, 196, 0.2));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .track-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .track-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .track-artist {
+            font-size: 1rem;
+            color: #4ecdc4;
+            margin-bottom: 5px;
+        }
+
+        .track-album {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+
+        .waveform {
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .wave-bars {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .wave-bar {
+            width: 3px;
+            background: linear-gradient(to top, #4ecdc4, #ff6b6b);
+            border-radius: 2px;
+            animation: waveAnimation 1.5s ease-in-out infinite paused;
+            /* Paused by default */
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .play-btn {
+            width: 70px;
+            height: 70px;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #ff6b6b);
+            width: 0%;
+            /* Start at 0 */
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-top: 5px;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .volume-slider {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .volume-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #ff6b6b);
+            width: 70%;
+            border-radius: 2px;
+        }
+
+        .track-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .track-item:hover {
+            background: rgba(76, 205, 196, 0.2);
+        }
+
+        .track-item.active {
+            background: rgba(255, 107, 107, 0.3);
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .track-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .track-duration {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes robotBlink {
+
+            0%,
+            90%,
+            100% {
+                transform: scale(1);
+            }
+
+            95% {
+                transform: scale(0.95);
+            }
+        }
+
+        @keyframes waveAnimation {
+
+            0%,
+            100% {
+                height: 20%;
+            }
+
+            50% {
+                height: 80%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .player-panel {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .album-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .robot-dj {
+                padding: 20px;
+            }
+
+            .robot-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">Velvet Needle Music Co.</h1>
+            <p class="tagline">Where every groove tells a story</p>
+            <div class="station-info">
+                <h3>🎵 Live from the Cosmic Soundscape 🎵</h3>
+                <p>Broadcasting the finest sounds from The Construction Bronocs</p>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="robot-dj">
+                    <div class="robot-avatar">🤖</div>
+                    <div class="dj-name">DJ Groove-Bot 3000</div>
+                    <div class="dj-message">
+                        "Welcome to the sonic dimension! I'm spinning the freshest tracks from The Construction Bronocs.
+                        Each beat is carefully calibrated for maximum groove satisfaction. Let the rhythm take control!"
+                    </div>
+                </div>
+
+                <div class="album-section">
+                    <h2 class="section-title">Featured Albums</h2>
+                    <div class="album-grid">
+                        <div class="album-card" onclick="selectAlbum('construction-vibes')">
+                            <div class="album-cover">🏗️</div>
+                            <div class="album-title">Construction Vibes</div>
+                            <div class="album-artist">The Construction Bronocs</div>
+                            <div class="album-duration">Total Time: 47:32</div>
+                        </div>
+
+                        <div class="album-card" onclick="selectAlbum('steel-dreams')">
+                            <div class="album-cover">⚡</div>
+                            <div class="album-title">Steel Dreams</div>
+                            <div class="album-artist">The Construction Bronocs</div>
+                            <div class="album-duration">Total Time: 52:18</div>
+                        </div>
+
+                        <div class="album-card" onclick="selectAlbum('urban-symphony')">
+                            <div class="album-cover">🌆</div>
+                            <div class="album-title">Urban Symphony</div>
+                            <div class="album-artist">The Construction Bronocs</div>
+                            <div class="album-duration">Total Time: 41:25</div>
+                        </div>
+
+                        <div class="album-card" onclick="selectAlbum('blueprint-beats')">
+                            <div class="album-cover">📐</div>
+                            <div class="album-title">Blueprint Beats</div>
+                            <div class="album-artist">The Construction Bronocs</div>
+                            <div class="album-duration">Total Time: 38:47</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player-panel">
+                <div class="now-playing">
+                    <div class="track-info">
+                        <div class="track-title" id="current-track">Select a Song</div>
+                        <div class="track-artist">The Construction Bronocs</div>
+                        <div class="track-album">from Construction Vibes</div>
+                    </div>
+
+                    <div class="waveform">
+                        <div class="wave-bars" id="wave-bars">
+                            <div class="wave-bar" style="animation-delay: 0s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.5s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.6s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.7s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.8s;"></div>
+                            <div class="wave-bar" style="animation-delay: 0.9s;"></div>
+                            <div class="wave-bar" style="animation-delay: 1s;"></div>
+                            <div class="wave-bar" style="animation-delay: 1.1s;"></div>
+                            <div class="wave-bar" style="animation-delay: 1.2s;"></div>
+                            <div class="wave-bar" style="animation-delay: 1.3s;"></div>
+                            <div class="wave-bar" style="animation-delay: 1.4s;"></div>
+                        </div>
+                    </div>
+
+                    <div class="player-controls">
+                        <button class="control-btn" onclick="previousTrack()">⏮️</button>
+                        <button class="control-btn play-btn" onclick="togglePlay()" id="play-btn">▶️</button>
+                        <button class="control-btn" onclick="nextTrack()">⏭️</button>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="current-time">0:00</span>
+                            <span id="total-time">0:00</span>
+                        </div>
+                    </div>
+
+                    <div class="volume-container">
+                        <span>🔊</span>
+                        <div class="volume-slider" id="volume-slider">
+                            <div class="volume-fill" id="volume-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="track-list">
+                    <h3 style="color: #4ecdc4; margin-bottom: 15px; text-align: center;">Current Album</h3>
+                    <div id="track-list-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-player"></audio>
+
+    <script>
+        // --- DOM Elements ---
+        const audioPlayer = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalTimeEl = document.getElementById('total-time');
+        const volumeFill = document.getElementById('volume-fill');
+        const volumeSlider = document.getElementById('volume-slider');
+        const waveBars = document.querySelectorAll('.wave-bar');
+
+        // --- Music Database with Dummy MP3 Paths ---
+        // **ACTION REQUIRED**: Replace 'audio/dummy-song-X.mp3' with your actual file paths.
+        const musicDatabase = {
+            'construction-vibes': {
+                title: 'A Job Well Done',
+                artist: 'The Construction Bronocs',
+                totalTime: '47:32',
+                cover: '🏗️',
+                tracks: [
+                    { name: 'Broncos on the Rise', duration: '3:18', src: 'audio/Broncos on the Rise.mp3' },
+                    { name: 'Concrete Dreams', duration: '3:42', src: 'audio/dummy-song-2.mp3' },
+                    { name: 'Steel Worker Blues', duration: '5:23', src: 'audio/dummy-song-3.mp3' },
+                    { name: 'Foundation Funk', duration: '4:08', src: 'audio/dummy-song-4.mp3' }
+                ]
+            },
+            'steel-dreams': {
+                title: 'Steel Dreams',
+                artist: 'The Construction Bronocs',
+                totalTime: '52:18',
+                cover: '⚡',
+                tracks: [
+                    { name: 'Electric Voltage', duration: '4:28', src: 'audio/dummy-song-5.mp3' },
+                    { name: 'Power Line Passion', duration: '3:57', src: 'audio/dummy-song-6.mp3' },
+                    { name: 'Transformer Tales', duration: '5:14', src: 'audio/dummy-song-7.mp3' }
+                ]
+            },
+            'urban-symphony': {
+                title: 'Urban Symphony',
+                artist: 'The Construction Bronocs',
+                totalTime: '41:25',
+                cover: '🌆',
+                tracks: [
+                    { name: 'City Lights', duration: '4:12', src: 'audio/dummy-song-8.mp3' },
+                    { name: 'Metro Melody', duration: '3:48', src: 'audio/dummy-song-9.mp3' },
+                    { name: 'Skyscraper Sway', duration: '4:35', src: 'audio/dummy-song-10.mp3' }
+                ]
+            },
+            'blueprint-beats': {
+                title: 'Blueprint Beats',
+                artist: 'The Construction Bronocs',
+                totalTime: '38:47',
+                cover: '📐',
+                tracks: [
+                    { name: 'Design Phase', duration: '3:45', src: 'audio/dummy-song-11.mp3' },
+                    { name: 'Measurement Madness', duration: '4:12', src: 'audio/dummy-song-12.mp3' }
+                ]
+            }
+        };
+
+        // --- Player State ---
+        let currentAlbum = 'construction-vibes';
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+
+        // --- DJ Messages ---
+        const djMessages = [
+            "This track really knows how to build up the energy! The Construction Bronocs never disappoint.",
+            "Feel that bass foundation? That's some solid construction right there!",
+            "Next up, we've got another architectural masterpiece from our friends at the construction site.",
+            "The rhythm in this track is as steady as a crane operator on their best day!",
+            "DJ Groove-Bot 3000 approved! This beat hits harder than a jackhammer.",
+            "Now this is what I call premium construction-grade audio engineering!"
+        ];
+
+        // --- Core Functions ---
+
+        function loadTrack(albumId, trackIndex) {
+            currentAlbum = albumId;
+            currentTrackIndex = trackIndex;
+
+            const album = musicDatabase[currentAlbum];
+            const track = album.tracks[currentTrackIndex];
+
+            audioPlayer.src = track.src; // Set the audio source
+            updateNowPlayingUI(album, track);
+            updateTrackListUI();
+        }
+
+        function playTrack() {
+            audioPlayer.play();
+            isPlaying = true;
+            playBtn.textContent = '⏸️';
+            waveBars.forEach(bar => bar.style.animationPlayState = 'running');
+        }
+
+        function pauseTrack() {
+            audioPlayer.pause();
+            isPlaying = false;
+            playBtn.textContent = '▶️';
+            waveBars.forEach(bar => bar.style.animationPlayState = 'paused');
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                pauseTrack();
+            } else {
+                playTrack();
+            }
+        }
+
+        function previousTrack() {
+            currentTrackIndex--;
+            if (currentTrackIndex < 0) {
+                currentTrackIndex = musicDatabase[currentAlbum].tracks.length - 1;
+            }
+            loadTrack(currentAlbum, currentTrackIndex);
+            playTrack();
+            updateDJMessage();
+        }
+
+        function nextTrack() {
+            currentTrackIndex++;
+            if (currentTrackIndex >= musicDatabase[currentAlbum].tracks.length) {
+                currentTrackIndex = 0;
+            }
+            loadTrack(currentAlbum, currentTrackIndex);
+            playTrack();
+            updateDJMessage();
+        }
+
+        function selectAlbum(albumId) {
+            pauseTrack();
+            loadTrack(albumId, 0); // Load the first track of the new album
+            updateDJMessage();
+        }
+
+        function selectTrack(trackIndex) {
+            loadTrack(currentAlbum, trackIndex);
+            playTrack();
+            updateDJMessage();
+        }
+
+        // --- UI Update Functions ---
+
+        function updateNowPlayingUI(album, track) {
+            document.getElementById('current-track').textContent = track.name;
+            document.querySelector('.track-artist').textContent = album.artist;
+            document.querySelector('.track-album').textContent = `from ${album.title}`;
+        }
+
+        function updateTrackListUI() {
+            const album = musicDatabase[currentAlbum];
+            const container = document.getElementById('track-list-container');
+            container.innerHTML = '';
+
+            album.tracks.forEach((track, index) => {
+                const trackElement = document.createElement('div');
+                trackElement.className = `track-item ${index === currentTrackIndex ? 'active' : ''}`;
+                trackElement.onclick = () => selectTrack(index);
+
+                trackElement.innerHTML = `
+                        <span class="track-name">${index + 1}. ${track.name}</span>
+                        <span class="track-duration">${track.duration}</span>
+                    `;
+                container.appendChild(trackElement);
+            });
+        }
+
+        function updateProgress() {
+            const { duration, currentTime } = audioPlayer;
+            if (duration) {
+                const progressPercent = (currentTime / duration) * 100;
+                progressFill.style.width = `${progressPercent}%`;
+
+                totalTimeEl.textContent = formatTime(duration);
+                currentTimeEl.textContent = formatTime(currentTime);
+            }
+        }
+
+        function updateDJMessage() {
+            const djMessageElement = document.querySelector('.dj-message');
+            const randomMessage = djMessages[Math.floor(Math.random() * djMessages.length)];
+            djMessageElement.textContent = randomMessage;
+        }
+
+        // --- Helper Functions & Event Handlers ---
+
+        function formatTime(seconds) {
+            const time = Math.floor(seconds);
+            const mins = Math.floor(time / 60);
+            const secs = time % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function handleSeek(event) {
+            const rect = progressBar.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const width = rect.width;
+            const duration = audioPlayer.duration;
+
+            if (duration) {
+                audioPlayer.currentTime = (clickX / width) * duration;
+            }
+        }
+
+        function handleVolume(event) {
+            const rect = volumeSlider.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const width = rect.width;
+            let volume = clickX / width;
+
+            if (volume < 0) volume = 0;
+            if (volume > 1) volume = 1;
+
+            audioPlayer.volume = volume;
+            volumeFill.style.width = `${volume * 100}%`;
+        }
+
+        // --- Initialization ---
+
+        function init() {
+            // Set default volume
+            audioPlayer.volume = 0.7;
+
+            // Load the first track without playing it
+            loadTrack(currentAlbum, 0);
+
+            // Add event listeners
+            audioPlayer.addEventListener('timeupdate', updateProgress);
+            audioPlayer.addEventListener('ended', nextTrack);
+            progressBar.addEventListener('click', handleSeek);
+            volumeSlider.addEventListener('click', handleVolume);
+
+            // Auto-update DJ messages every 30 seconds
+            setInterval(updateDJMessage, 30000);
+        }
+
+        // Start the application when the page loads
+        window.addEventListener('load', init);
+    </script>
+</body>
+
+</html>
